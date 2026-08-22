@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import ScatterText from './originkit/ui/dot-scatter';
+import ArrowRevealButton from './originkit/ui/arrow-reveal-button';
+import LabelSlideButton from './originkit/ui/label-slide-button';
+import { AsciiPortrait } from './originkit/ui/hero-32/ascii-portrait';
 
 const words = [
   'APIs',
@@ -70,14 +74,29 @@ export default function Hero({ isReady }) {
         <div className="eyebrow">
           <span className="dot"></span>Full Stack Developer • Open to work • Open to Internships
         </div>
-        <h1>
-          <span className="hero-line">Building</span>
-          <span className="hero-line">practical</span>
-          <span className="hero-line">
-            <span className="accent-text">intelligent</span>
-          </span>
-          <span className="hero-line">products.</span>
-        </h1>
+        <div 
+          style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '8px', 
+            margin: '0 0 24px 0', 
+            maxWidth: '100%',
+            overflow: 'visible'
+          }}
+        >
+          <div style={{ height: 'clamp(65px, 12vw, 105px)', width: '100%' }}>
+            <ScatterText text="Building" color="var(--text)" align="left" variant="word" cellScale={4.5} fillRatio={0.82} style={{ height: '100%', minHeight: 'unset' }} />
+          </div>
+          <div style={{ height: 'clamp(65px, 12vw, 105px)', width: '100%' }}>
+            <ScatterText text="practical" color="var(--cyan)" align="left" variant="word" cellScale={4.5} fillRatio={0.82} style={{ height: '100%', minHeight: 'unset' }} />
+          </div>
+          <div style={{ height: 'clamp(65px, 12vw, 105px)', width: '100%' }}>
+            <ScatterText text="intelligent" color="url(#scatter-gradient)" align="left" variant="word" cellScale={4.5} fillRatio={0.82} style={{ height: '100%', minHeight: 'unset' }} />
+          </div>
+          <div style={{ height: 'clamp(65px, 12vw, 105px)', width: '100%' }}>
+            <ScatterText text="products." color="var(--neon)" align="left" variant="word" cellScale={4.5} fillRatio={0.82} style={{ height: '100%', minHeight: 'unset' }} />
+          </div>
+        </div>
         <div className="typing-chip" aria-label="Core focus keywords">
           <span className="prompt">→</span>
           <span className="typed-word">{typedText}</span>
@@ -92,39 +111,101 @@ export default function Hero({ isReady }) {
           practical web tools.
         </p>
         <div className="hero-actions">
-          <a className="btn btn-primary" href="#projects">
-            See projects
-          </a>
-          <a className="btn btn-ghost" href="#contact">
-            Let’s connect
-          </a>
+          <LabelSlideButton
+            label="See projects"
+            link="#projects"
+            newTab={false}
+            colors={{
+              fill: 'var(--neon)',
+              textColor: '#ffffff',
+              hoverFill: 'var(--cyan)',
+              hoverTextColor: '#07060d'
+            }}
+            font={{
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: '0.95rem',
+              fontWeight: '600',
+              letterSpacing: '-0.01em',
+            }}
+            icon={{
+              side: 'right',
+              type: 'symbol',
+              restSymbol: '→',
+              hoverSymbol: '→',
+              background: 'rgba(255, 255, 255, 0.12)',
+              hoverBackground: '#07060d',
+              color: '#ffffff',
+              hoverColor: '#22d3ee',
+              size: 12,
+              padding: 7,
+              angle: 0
+            }}
+            gap={12}
+            padding="12px 18px 12px 24px"
+            rounded={100}
+            style={{
+              height: '46px',
+            }}
+          />
+          <ArrowRevealButton
+            label="Let’s connect"
+            link="#contact"
+            newTab={false}
+            colors={{ fill: 'rgba(255, 255, 255, 0.03)', textColor: 'var(--text)' }}
+            border={{ borderColor: 'rgba(255, 255, 255, 0.12)', borderStyle: 'solid', borderWidth: 1 }}
+            font={{
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: '0.95rem',
+              fontWeight: '600',
+              letterSpacing: '-0.01em',
+            }}
+            icon={{
+              side: 'right',
+              position: 'right',
+              type: 'icon',
+              icon: 'arrow',
+              background: 'linear-gradient(135deg, var(--neon) 0%, var(--cyan) 100%)',
+              color: '#ffffff',
+              size: 24,
+              iconSize: 14,
+              padding: 8,
+              restAngle: 0,
+              hoverAngle: 45
+            }}
+            gap={16}
+            padding="12px 20px 12px 24px"
+            rounded={100}
+            style={{
+              height: '46px',
+            }}
+          />
         </div>
       </div>
 
-      <div className="hero-visual">
+      <div className="hero-visual" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div
           ref={photoCardRef}
-          className="photo-card"
-          id="photo-card"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
+          style={{
+            width: 'min(400px, 100%)',
+            height: '520px',
+            maxHeight: '70vh',
+            borderRadius: '36px',
+            overflow: 'hidden',
+            position: 'relative',
+            background: 'rgba(255, 255, 255, 0.015)',
+            border: '3px solid rgba(34, 211, 238, 0.35)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transformStyle: 'preserve-3d',
+            transition: 'transform 0.1s ease-out',
+            boxShadow: '0 20px 56px rgba(0, 0, 0, 0.55), inset 0 0 40px rgba(34, 211, 238, 0.16)',
+            backdropFilter: 'blur(8px)',
+          }}
         >
-          <img
-            src="assets/photo2.jpeg"
-            alt="Portrait of Santhosh Kumar Reddy Gajjala"
-          />
-          <div className="scan" aria-hidden="true"></div>
-          <div className="hud-bracket tl"></div>
-          <div className="hud-bracket tr"></div>
-          <div className="hud-bracket bl"></div>
-          <div className="hud-bracket br"></div>
-          <div className="agent-card">
-            <small>Current focus</small>
-            <strong>
-              Building a reliable booking platform for farmers with a clean
-              admin workflow.
-            </strong>
-          </div>
+          <AsciiPortrait />
         </div>
       </div>
     </section>

@@ -26,3 +26,4 @@ dist-ssr
 # Virtual Env
 .venv/
 tmp-vite-app/
+.originkit/

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import CustomCursor from './components/CustomCursor';
+import MouseEffects from './components/originkit/ui/clickeffects-variant-5';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -73,6 +74,18 @@ export default function App() {
   return (
     <>
       <CustomCursor />
+      <MouseEffects
+        showLabel={false}
+        color="rgba(139, 92, 246, 0.7)"
+        effectSize={100}
+        duration={0.6}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          zIndex: 99999,
+        }}
+      />
       <Preloader onComplete={() => setIsReady(true)} />
 
       {/* Ambient background blobs */}

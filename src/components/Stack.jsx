@@ -76,6 +76,9 @@ export default function Stack() {
           <span className="stack-pill mixed">
             <span className="bullet"></span>Vercel
           </span>
+          <span className="stack-pill mixed">
+            <span className="bullet"></span>Netlify
+          </span>
         </div>
       </div>
     </section>
