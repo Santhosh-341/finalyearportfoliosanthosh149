@@ -5,6 +5,7 @@ import NeonBorder from './originkit/ui/neon-border';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [timeStr, setTimeStr] = useState('00:00 IST');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     // Scroll listener
@@ -37,9 +38,18 @@ export default function Navbar() {
     };
   }, []);
 
+  const navItems = [
+    { label: 'Projects', url: '#projects', color: 'var(--cyan)', preview: '/assets/preview_projects.png' },
+    { label: 'About', url: '#about', color: 'var(--neon)', preview: '/assets/preview_about.png' },
+    { label: 'Stack', url: '#stack', color: '#10b981', preview: '/assets/preview_stack.png' },
+    { label: 'Experience', url: '#experience', color: '#00f5ff', preview: '/assets/preview_experience.png' },
+    { label: 'Certificates', url: '#certificates', color: '#f59e0b', preview: '/assets/cert_quizoff.png' },
+    { label: 'Contact', url: '#contact', color: '#f43f5e', preview: '/assets/preview_contact.png' },
+  ];
+
   return (
-    <nav 
-      id="nav" 
+    <nav
+      id="nav"
       style={{
         position: 'fixed',
         top: 0,
@@ -52,11 +62,11 @@ export default function Navbar() {
         boxShadow: 'none',
       }}
     >
-      <div 
-        className="container" 
-        style={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
+      <div
+        className="container"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
           alignItems: 'center',
           overflow: 'visible',
           width: '100%',
@@ -78,14 +88,11 @@ export default function Navbar() {
             alignItems: 'center',
           }}
         >
-          <div 
-            className="nav-wrap" 
-            style={{ 
-              width: '100%', 
+          <div
+            className="nav-wrap"
+            style={{
+              width: '100%',
               padding: isScrolled ? '4px 8px' : '12px 0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
               transition: 'all 0.3s ease',
             }}
           >
@@ -93,40 +100,65 @@ export default function Navbar() {
               <span className="brand-mark">L</span>
               <span>Santhosh.dev</span>
             </a>
-            <div className="nav-links" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-              <NeonBorder variant="variant-4" color1="var(--cyan)" color2="var(--cyan)" borderRadius="9999px" hoverReaction={true}>
-                <LinkPreview url="#projects" previewImage="/assets/preview_projects.png" color="var(--cyan)">Projects</LinkPreview>
-              </NeonBorder>
-              
-              <NeonBorder variant="variant-4" color1="var(--neon)" color2="var(--neon)" borderRadius="9999px" hoverReaction={true}>
-                <LinkPreview url="#about" previewImage="/assets/preview_about.png" color="var(--neon)">About</LinkPreview>
-              </NeonBorder>
-              
-              <NeonBorder variant="variant-4" color1="#10b981" color2="#10b981" borderRadius="9999px" hoverReaction={true}>
-                <LinkPreview url="#stack" previewImage="/assets/preview_stack.png" color="#10b981">Stack</LinkPreview>
-              </NeonBorder>
-              
-              <NeonBorder variant="variant-4" color1="#00f5ff" color2="#00f5ff" borderRadius="9999px" hoverReaction={true}>
-                <LinkPreview url="#experience" previewImage="/assets/preview_experience.png" color="#00f5ff">Experience</LinkPreview>
-              </NeonBorder>
-              
-              <NeonBorder variant="variant-4" color1="#f59e0b" color2="#f59e0b" borderRadius="9999px" hoverReaction={true}>
-                <LinkPreview url="#certificates" previewImage="/assets/cert_quizoff.png" color="#f59e0b">certificates</LinkPreview>
-              </NeonBorder>
-              
-              <NeonBorder variant="variant-4" color1="#f43f5e" color2="#f43f5e" borderRadius="9999px" hoverReaction={true}>
-                <LinkPreview url="#contact" previewImage="/assets/preview_contact.png" color="#f43f5e">Contact</LinkPreview>
-              </NeonBorder>
+
+            <div className="nav-links" aria-label="Primary navigation">
+              {navItems.map((item) => (
+                <NeonBorder key={item.label} variant="variant-4" color1={item.color} color2={item.color} borderRadius="9999px" hoverReaction={true}>
+                  <LinkPreview url={item.url} previewImage={item.preview} color={item.color}>{item.label}</LinkPreview>
+                </NeonBorder>
+              ))}
             </div>
+
             <div className="nav-meta">
               <span id="live-clock">{timeStr}</span>
               <span className="status-pill">
                 <span className="dot"></span>available
               </span>
             </div>
+
+            <button
+              type="button"
+              className="mobile-menu-toggle"
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
           </div>
         </div>
       </div>
+
+      <div
+        className={`mobile-menu-backdrop ${isMenuOpen ? 'open' : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+        aria-hidden={!isMenuOpen}
+      />
+
+      <aside className={`mobile-menu-panel ${isMenuOpen ? 'open' : ''}`} aria-label="Mobile navigation">
+        <div className="mobile-menu-header">
+          <span className="brand-mark">L</span>
+          <span className="mobile-menu-title">Menu</span>
+          <button
+            type="button"
+            className="mobile-menu-close"
+            aria-label="Close menu"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="mobile-menu-links">
+          {navItems.map((item) => (
+            <a key={item.label} href={item.url} onClick={() => setIsMenuOpen(false)}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </aside>
     </nav>
   );
 }

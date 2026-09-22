@@ -57,6 +57,9 @@ export default function Stack() {
           <span className="stack-pill mixed">
             <span className="bullet"></span>MySQL
           </span>
+          <span className="stack-pill mixed">
+            <span className="bullet"></span>MongoDB
+          </span>
           <span className="stack-pill green">
             <span className="bullet"></span>Postman
           </span>

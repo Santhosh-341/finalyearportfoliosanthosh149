@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface RoundCarouselImage {
   src: string;
@@ -57,6 +57,21 @@ export default function RoundCarousel({
 }: RoundCarouselProps) {
   const items = images.length > 0 ? images : DEFAULT_IMAGES;
   const count = items.length;
+  const [viewportWidth, setViewportWidth] = useState(() =>
+    typeof window === "undefined" ? 1440 : window.innerWidth
+  );
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const responsiveImageWidth = Math.min(
+    imageWidth,
+    Math.max(220, viewportWidth * 0.82)
+  );
+  const responsiveImageHeight = responsiveImageWidth * (imageHeight / imageWidth);
 
   const ringRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef(0);
@@ -68,7 +83,7 @@ export default function RoundCarousel({
 
   const angle = 360 / count;
   const factor = 1 + spacing * 0.15;
-  const radius = (imageWidth * factor) / (2 * Math.tan(Math.PI / count));
+  const radius = (responsiveImageWidth * factor) / (2 * Math.tan(Math.PI / count));
   const radiusPx = cornerRadius;
   const degPerSec = speed * 6 * (direction === "left" ? -1 : 1);
 
@@ -158,8 +173,8 @@ export default function RoundCarousel({
           ref={ringRef}
           style={{
             position: "relative",
-            width: imageWidth,
-            height: imageHeight,
+            width: responsiveImageWidth,
+            height: responsiveImageHeight,
             transformStyle: "preserve-3d",
           }}
         >

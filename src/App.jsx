@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import Lenis from '@studio-freight/lenis';
 import CustomCursor from './components/CustomCursor';
 import MouseEffects from './components/originkit/ui/clickeffects-variant-5';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Stats from './components/Stats';
 import Terminal from './components/Terminal';
 import Projects from './components/Projects';
 import About from './components/About';
@@ -71,6 +71,31 @@ export default function App() {
     };
   }, [isReady]);
 
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <>
       <CustomCursor />
@@ -97,7 +122,6 @@ export default function App() {
 
       <main id="top">
         <Hero isReady={isReady} />
-        <Stats />
 
         {/* Technology marquee */}
         <div className="marquee" aria-label="Technology marquee">

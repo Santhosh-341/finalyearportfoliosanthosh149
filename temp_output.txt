@@ -1,0 +1,4 @@
+1312: .experience-map-item:nth-child(even) .experience-card-wrap {
+1315: .experience-card-wrap {
+1325: .experience-card-wrap:hover {
+1501: .experience-card-wrap {

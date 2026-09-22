@@ -37,11 +37,11 @@ export default function About() {
           </div>
           <div className="fact">
             <span>Role</span>
-            <strong>Full Stack Developer</strong>
+            <strong>MERN Stack Developer</strong>
           </div>
           <div className="fact">
             <span>Location</span>
-            <strong>Andhra Pradesh, India</strong>
+            <strong>Kadapa, Andhra Pradesh, India</strong>
           </div>
           <div className="fact">
             <span>Degree</span>
