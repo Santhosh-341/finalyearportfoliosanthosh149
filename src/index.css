@@ -1032,6 +1032,54 @@
         color: var(--text);
         margin-top: 10px;
       }
+      .project-access {
+        margin-top: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+      .project-access summary {
+        padding: 12px 14px;
+        color: var(--text);
+        cursor: pointer;
+        font-family: JetBrains Mono, monospace;
+        font-size: 0.84rem;
+      }
+      .project-access summary::marker {
+        color: var(--cyan);
+      }
+      .project-access-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: 0 14px 14px;
+      }
+      .project-access-version {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 16px;
+        padding: 12px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.2);
+      }
+      .project-access-version h4 {
+        flex-basis: 100%;
+        margin: 0;
+        color: var(--text-soft);
+        font-size: 0.82rem;
+      }
+      .project-access-version a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text);
+        font-family: JetBrains Mono, monospace;
+        font-size: 0.76rem;
+      }
+      .project-access-version a:hover {
+        color: var(--cyan);
+      }
       .project-link .arrow {
         display: inline-block;
         transition:

@@ -7,11 +7,21 @@ const projects = [
     year: '01 / 2025',
     status: 'Live',
     statusClass: 'live',
-    title: 'Agriculture Equipment Booking System',
+    title: 'Agrigo | Agriculture Equipment Booking',
     description: 'A full-stack booking platform for farmers to reserve tractors and equipment, with owner dashboards, calendar scheduling, and role-based flow management.',
     tags: ['MERN', 'MySQL', 'REST APIs', 'Dashboard'],
-    link: '#contact',
-    linkText: 'Explore the build',
+    versions: [
+      {
+        label: 'Farmer side',
+        live: 'https://agrigo-user.netlify.app/',
+        github: 'https://github.com/Santhosh-341/agrigo-project-user',
+      },
+      {
+        label: 'Owner side',
+        live: 'https://agrigo-owner-project.netlify.app/',
+        github: 'https://github.com/Santhosh-341/agrigo-project-owner',
+      },
+    ],
     codeSnippet: 'const booking = await createBooking({\n  userId, equipmentId, slot\n});',
     glyph: '🚜',
   },
@@ -120,9 +130,28 @@ function ProjectCard({ project }) {
           </span>
         ))}
       </div>
-      <a className="project-link" href={project.link}>
-        {project.linkText} <span className="arrow">→</span>
-      </a>
+      {project.versions ? (
+        <details className="project-access">
+          <summary>Open project links</summary>
+          <div className="project-access-options">
+            {project.versions.map((version) => (
+              <div className="project-access-version" key={version.label}>
+                <h4>{version.label}</h4>
+                <a href={version.live} target="_blank" rel="noreferrer">
+                  Live site <span className="arrow">→</span>
+                </a>
+                <a href={version.github} target="_blank" rel="noreferrer">
+                  GitHub <span className="arrow">→</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        </details>
+      ) : (
+        <a className="project-link" href={project.link}>
+          {project.linkText} <span className="arrow">→</span>
+        </a>
+      )}
       <div className="project-visual">
         <div className="code-snippet">{project.codeSnippet}</div>
         <div className="glyph">{project.glyph}</div>
