@@ -1032,6 +1032,11 @@
         color: var(--text);
         margin-top: 10px;
       }
+      .project-link-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 18px;
+      }
       .project-access {
         margin-top: 14px;
         border: 1px solid rgba(255, 255, 255, 0.1);

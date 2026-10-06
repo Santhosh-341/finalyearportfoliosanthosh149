@@ -28,58 +28,42 @@ const projects = [
   {
     id: 2,
     featured: false,
-    year: '02 / 2024',
-    status: 'Beta',
-    statusClass: 'beta',
-    title: 'Notes API',
-    description: 'A clean Node.js and Express API with MySQL persistence for CRUD operations, tested with Postman and designed for straightforward app integration.',
-    tags: ['Node.js', 'Express', 'MySQL', 'Postman'],
-    link: '#contact',
-    linkText: 'View details',
-    codeSnippet: 'GET /notes/:id',
-    glyph: '📝',
-  },
-  {
-    id: 3,
-    featured: false,
     year: '03 / 2024',
     status: 'Live',
     statusClass: 'live',
     title: 'Personal Portfolio',
     description: 'A responsive portfolio site built with semantic HTML, CSS, and vanilla JavaScript, focused on motion, clarity, and strong presentation.',
     tags: ['HTML', 'CSS', 'JS', 'Responsive'],
-    link: '#contact',
-    linkText: 'Open case study',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/Santhosh-341/finalyearportfoliosanthosh149.git',
+      },
+    ],
     codeSnippet: '<section class="hero">',
     glyph: '💼',
   },
   {
-    id: 4,
+    id: 3,
     featured: false,
     year: '04 / 2023',
-    status: 'Archived',
-    statusClass: 'archived',
-    title: 'Weather App',
-    description: 'A lightweight JavaScript app that fetches real-time weather data and displays location-based conditions with a tidy interface.',
-    tags: ['JavaScript', 'Fetch API', 'UI', 'Geolocation'],
-    link: '#contact',
-    linkText: 'See concept',
+    status: 'Live',
+    statusClass: 'live',
+    title: 'Aura | Live Atmospheric Engine',
+    description: 'A weather app that brings live atmospheric conditions to a clean, location-aware interface.',
+    tags: ['Weather', 'Live Data', 'JavaScript', 'UI'],
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/Santhosh-341/weather-final.git',
+      },
+      {
+        label: 'Live site',
+        href: 'https://weatherpredictiion.netlify.app/',
+      },
+    ],
     codeSnippet: 'fetchWeather(city)',
     glyph: '🌤️',
-  },
-  {
-    id: 5,
-    featured: false,
-    year: '05 / 2024',
-    status: 'Beta',
-    statusClass: 'beta',
-    title: 'Task Manager',
-    description: 'A practical task management app connecting a React frontend with a Node.js and Express backend and MySQL data layer.',
-    tags: ['React', 'Node.js', 'Express', 'MySQL'],
-    link: '#contact',
-    linkText: 'Read more',
-    codeSnippet: 'todos.map(task => ...)',
-    glyph: '✅',
   },
 ];
 
@@ -147,6 +131,14 @@ function ProjectCard({ project }) {
             ))}
           </div>
         </details>
+      ) : project.links ? (
+        <div className="project-link-group">
+          {project.links.map((link) => (
+            <a className="project-link" href={link.href} target="_blank" rel="noreferrer" key={link.label}>
+              {link.label} <span className="arrow">→</span>
+            </a>
+          ))}
+        </div>
       ) : (
         <a className="project-link" href={project.link}>
           {project.linkText} <span className="arrow">→</span>
