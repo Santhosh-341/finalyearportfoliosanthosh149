@@ -1021,27 +1021,18 @@
         border-color: rgba(139, 92, 246, 0.3);
         transform: translateY(-1px);
       }
-      .project-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-family:
-          JetBrains Mono,
-          monospace;
-        font-size: 0.88rem;
-        color: var(--text);
-        margin-top: 10px;
-      }
-      .project-link-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0 18px;
-      }
       .project-access {
         margin-top: 14px;
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 12px;
         background: rgba(255, 255, 255, 0.035);
+        transition:
+          border-color 0.25s ease,
+          background-color 0.25s ease;
+      }
+      .project-access[open] {
+        border-color: rgba(139, 92, 246, 0.42);
+        background: rgba(139, 92, 246, 0.06);
       }
       .project-access summary {
         padding: 12px 14px;
@@ -1049,13 +1040,18 @@
         cursor: pointer;
         font-family: JetBrains Mono, monospace;
         font-size: 0.84rem;
+        transition: color 0.25s ease;
+      }
+      .project-access summary:hover,
+      .project-access summary:focus-visible {
+        color: var(--cyan);
       }
       .project-access summary::marker {
         color: var(--cyan);
       }
       .project-access-options {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 12px;
         padding: 0 14px 14px;
       }
@@ -1065,8 +1061,34 @@
         align-items: center;
         gap: 8px 16px;
         padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 8px;
         background: rgba(0, 0, 0, 0.2);
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease,
+          background-color 0.25s ease;
+      }
+      .project-access[open] .project-access-version {
+        animation: project-link-reveal 0.35s ease both;
+      }
+      .project-access[open] .project-access-version:nth-child(2) {
+        animation-delay: 0.08s;
+      }
+      .project-access-version:hover {
+        transform: translateY(-3px);
+        border-color: rgba(139, 92, 246, 0.45);
+        background: rgba(139, 92, 246, 0.08);
+      }
+      @keyframes project-link-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       .project-access-version h4 {
         flex-basis: 100%;
@@ -1085,13 +1107,11 @@
       .project-access-version a:hover {
         color: var(--cyan);
       }
-      .project-link .arrow {
+      .project-access-version a .arrow {
         display: inline-block;
-        transition:
-          transform 0.25s ease,
-          gap 0.25s ease;
+        transition: transform 0.2s ease;
       }
-      .project-link:hover .arrow {
+      .project-access-version a:hover .arrow {
         transform: translateX(4px);
       }
       .project-visual {

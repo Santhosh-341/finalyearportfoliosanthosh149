@@ -31,16 +31,16 @@ const projects = [
     year: '03 / 2024',
     status: 'Live',
     statusClass: 'live',
-    title: 'Personal Portfolio',
-    description: 'A responsive portfolio site built with semantic HTML, CSS, and vanilla JavaScript, focused on motion, clarity, and strong presentation.',
-    tags: ['HTML', 'CSS', 'JS', 'Responsive'],
-    links: [
+    title: 'Hindi Personal Portfolio',
+    description: 'A responsive Hindi-language personal portfolio built with React.js to showcase projects, skills, and experience.',
+    tags: ['React.js', 'Hindi', 'Responsive UI'],
+    versions: [
       {
-        label: 'GitHub',
-        href: 'https://github.com/Santhosh-341/finalyearportfoliosanthosh149.git',
+        label: 'Personal Portfolio',
+        github: 'https://github.com/Santhosh-341/finalyearportfoliosanthosh149.git',
       },
     ],
-    codeSnippet: '<section class="hero">',
+    codeSnippet: '<Portfolio language="hi" />',
     glyph: '💼',
   },
   {
@@ -52,14 +52,11 @@ const projects = [
     title: 'Aura | Live Atmospheric Engine',
     description: 'A weather app that brings live atmospheric conditions to a clean, location-aware interface.',
     tags: ['Weather', 'Live Data', 'JavaScript', 'UI'],
-    links: [
+    versions: [
       {
-        label: 'GitHub',
-        href: 'https://github.com/Santhosh-341/weather-final.git',
-      },
-      {
-        label: 'Live site',
-        href: 'https://weatherpredictiion.netlify.app/',
+        label: 'Aura Weather App',
+        github: 'https://github.com/Santhosh-341/weather-final.git',
+        live: 'https://weatherpredictiion.netlify.app/',
       },
     ],
     codeSnippet: 'fetchWeather(city)',
@@ -114,36 +111,26 @@ function ProjectCard({ project }) {
           </span>
         ))}
       </div>
-      {project.versions ? (
-        <details className="project-access">
-          <summary>Open project links</summary>
-          <div className="project-access-options">
-            {project.versions.map((version) => (
-              <div className="project-access-version" key={version.label}>
-                <h4>{version.label}</h4>
+      <details className="project-access">
+        <summary>Open project links</summary>
+        <div className="project-access-options">
+          {project.versions.map((version) => (
+            <div className="project-access-version" key={version.label}>
+              <h4>{version.label}</h4>
+              {version.live && (
                 <a href={version.live} target="_blank" rel="noreferrer">
                   Live site <span className="arrow">→</span>
                 </a>
+              )}
+              {version.github && (
                 <a href={version.github} target="_blank" rel="noreferrer">
                   GitHub <span className="arrow">→</span>
                 </a>
-              </div>
-            ))}
-          </div>
-        </details>
-      ) : project.links ? (
-        <div className="project-link-group">
-          {project.links.map((link) => (
-            <a className="project-link" href={link.href} target="_blank" rel="noreferrer" key={link.label}>
-              {link.label} <span className="arrow">→</span>
-            </a>
+              )}
+            </div>
           ))}
         </div>
-      ) : (
-        <a className="project-link" href={project.link}>
-          {project.linkText} <span className="arrow">→</span>
-        </a>
-      )}
+      </details>
       <div className="project-visual">
         <div className="code-snippet">{project.codeSnippet}</div>
         <div className="glyph">{project.glyph}</div>
